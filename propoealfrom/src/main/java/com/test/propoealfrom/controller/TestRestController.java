@@ -10,8 +10,13 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class TestRestController {
+    @Autowired
+    private  RestTemplate restTemplate;
+
     @RequestMapping(value = "/**", method = RequestMethod.GET)
-    public String echo(@PathVariable String str) {
-        return "OK";
+    public String echo() {
+        String forObject = restTemplate.getForObject("http://cloudcore/get" ,String.class );
+        return forObject;
+
     }
 }
